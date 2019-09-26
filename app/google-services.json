@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "650966211944",
+    "firebase_url": "https://sticky-notes-b5535.firebaseio.com",
+    "project_id": "sticky-notes-b5535",
+    "storage_bucket": "sticky-notes-b5535.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:650966211944:android:fcb2159ca72b59eb294add",
+        "android_client_info": {
+          "package_name": "com.stickynotes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "650966211944-v5uua734kvroilaloo58i3h2fk5lfcq8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtMsUzRQu0u6Vy8IN3FE8gz0ZtfH2R0Xs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "650966211944-v5uua734kvroilaloo58i3h2fk5lfcq8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

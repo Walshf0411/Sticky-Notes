@@ -1,4 +1,4 @@
-package com.stickynotes.ui.dashboard;
+package com.stickynotes.ui.add_note;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.stickynotes.R;
 
-public class DashboardFragment extends Fragment {
+public class AddNoteFragment extends Fragment {
 
-    private DashboardViewModel dashboardViewModel;
+    private AddNoteViewModel addNoteViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                ViewModelProviders.of(this).get(DashboardViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        addNoteViewModel =
+                ViewModelProviders.of(this).get(AddNoteViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_add_note, container, false);
         final TextView textView = root.findViewById(R.id.text_dashboard);
-        dashboardViewModel.getText().observe(this, new Observer<String>() {
+        addNoteViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
