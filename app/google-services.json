@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "650966211944-hkvd5pr00u5jaq3ki5hg8gss2k0vd2p8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.stickynotes",
+            "certificate_hash": "05e7c1d58bcbb3a83c0850fa7a91deac1377b43a"
+          }
+        },
+        {
           "client_id": "650966211944-v5uua734kvroilaloo58i3h2fk5lfcq8.apps.googleusercontent.com",
           "client_type": 3
         }

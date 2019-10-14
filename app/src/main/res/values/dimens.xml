@@ -1,5 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- for recycler view and card view -->
+    <dimen name="activity_horizontal_margin_by2">8dp</dimen>
+    <dimen name="activity_vertical_margin_by2">8dp</dimen>
+
+    <!-- font sizes -->
+    <dimen name="header_size">32sp</dimen>
+
+    <!-- card view font sizes -->
+    <dimen name="note_tile_size">24sp</dimen>
+    <dimen name="note_size">14sp</dimen>
+    <dimen name="datetime_size">12sp</dimen>
+    <dimen name="note_item_in_between_margin">4dp</dimen>
+
+    <dimen name="note_item_corner_radius">10</dimen>
 </resources>

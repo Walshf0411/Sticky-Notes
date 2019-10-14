@@ -1,6 +1,19 @@
 <resources>
     <string name="app_name">Sticky Notes</string>
+    <string name="TAG">TAG</string>
     <string name="title_home">Home</string>
     <string name="title_add_note">Add Note</string>
     <string name="title_settings">Settings</string>
+
+    <!-- Text Field labels -->
+    <string name="title_label">Enter title</string>
+    <string name="note_label">Enter note</string>
+    <string name="datetime_label">Enter date and time(Optional)</string>
+    <string name="add_note_label">add</string>
+
+    <!-- Recycler View dummy text-->
+    <string name="note_title_dummy">Note title</string>
+    <string name="note_dummy">lorem ipsum dolor</string>
+    <string name="note_datetime_dummy">datetime</string>
+
 </resources>
