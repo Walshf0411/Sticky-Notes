@@ -1,26 +1,22 @@
 package com.stickynotes.ui.home;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.stickynotes.models.Note;
-
-import java.util.List;
+import com.stickynotes.repository.NotesRepository;
 
 public class HomeViewModel extends ViewModel {
 
-    private MutableLiveData<List<Note>> notes;
+    private NotesRepository notesRepository;
 
     public HomeViewModel() {
-
+        notesRepository = NotesRepository.getInstance();
     }
 
-    public MutableLiveData<List<Note>> getNotes() {
-        return notes;
+    public NotesRepository getNotesRepository() {
+        return notesRepository;
     }
 
-    public void setNotes(MutableLiveData<List<Note>> notes) {
-        this.notes = notes;
+    public void setNotesRepository(NotesRepository notesRepository) {
+        this.notesRepository = notesRepository;
     }
 }

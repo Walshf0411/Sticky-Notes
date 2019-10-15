@@ -13,18 +13,15 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.stickynotes.Constants;
 import com.stickynotes.R;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.stickynotes.models.Note;
 
 public class AddNoteFragment extends Fragment {
 
@@ -44,6 +41,7 @@ public class AddNoteFragment extends Fragment {
     }
 
     private void initComponents() {
+        addNoteViewModel = ViewModelProviders.of(this).get(AddNoteViewModel.class);
         // initialize all the components
         noteTitle = (TextInputLayout) root.findViewById(R.id.note_title_input);
         note = (TextInputLayout) root.findViewById(R.id.note_input);
@@ -60,7 +58,6 @@ public class AddNoteFragment extends Fragment {
                     public void onClick(View view) {
                         if (formIsValid()) {
                             log("Form valid - writing to firebase");
-                            showToast("Sending to db");
                             writeToFirebase(
                                     getString(noteTitle.getEditText()),
                                     getString(note.getEditText()),
@@ -125,34 +122,33 @@ public class AddNoteFragment extends Fragment {
     }
 
     private void writeToFirebase(String noteTitle, String note, String noteDatetime) {
-        Map<String, String> data = new HashMap<>();
-        data.put(Constants.FIRESTORE_NOTE_TITLE_KEY, noteTitle);
-        data.put(Constants.FIRESTORE_NOTE_KEY, note);
-        data.put(Constants.FIRESTORE_NOTE_DATETIME_KEY, noteDatetime);
+        // Creating Note object for the current note
+        Note noteToBeSaved = new Note();
+        noteToBeSaved.setTitle(noteTitle);
+        noteToBeSaved.setNote(note);
+        noteToBeSaved.setDatetime(noteDatetime != null ? noteDatetime : "");
 
-        String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        showToast(UID);
-        String documentPath = "/users/" + UID + "/notes";
-        showProgesssDialog("Saving note...");
-        db.collection(documentPath)
-                .add(data)
-                .addOnCompleteListener(
-                        new OnCompleteListener<DocumentReference>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentReference> task) {
-                                if (task.isSuccessful()) {
-                                    // TODO: Navigate to appropiate screen
-                                    hideProgressDialog();
-                                    showToast("Written successfully to document");
-                                } else {
-                                    // TODO: Show error
-                                    hideProgressDialog();
-                                    showToast("Some error occurred");
-                                    log(task.getException().toString());
-                                }
-                            }
+        // show progress Dialog
+        showProgessDialog("Saving " + noteTitle);
+
+        addNoteViewModel.getNotesRepository().addNote(
+                noteToBeSaved,
+                new OnCompleteListener<DocumentReference>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                        if (task.isSuccessful()) {
+                            // Task is successful
+                            // TODO: navigate to appropriate screen
+                            hideProgressDialog();
+                            showToast("Note saved successfully");
+                        } else {
+                            // Task is not successful
+                            hideProgressDialog();
+                            showToast("Your note couldn't be saved");
                         }
-                );
+                    }
+                }
+        );
     }
 
     private String getString(EditText editText) {
@@ -160,7 +156,7 @@ public class AddNoteFragment extends Fragment {
         return text.equals("") ? "default" : text;
     }
 
-    private void showProgesssDialog(String message) {
+    private void showProgessDialog(String message) {
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage(message);
         progressDialog.show();

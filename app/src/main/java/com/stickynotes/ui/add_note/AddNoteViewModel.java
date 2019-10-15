@@ -1,19 +1,22 @@
 package com.stickynotes.ui.add_note;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
+import com.stickynotes.repository.NotesRepository;
 
 public class AddNoteViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+    public NotesRepository notesRepository;
 
     public AddNoteViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+        notesRepository = NotesRepository.getInstance();
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public NotesRepository getNotesRepository() {
+        return notesRepository;
+    }
+
+    public void setNotesRepository(NotesRepository notesRepository) {
+        this.notesRepository = notesRepository;
     }
 }
