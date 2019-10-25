@@ -16,4 +16,9 @@
     <string name="note_dummy">lorem ipsum dolor</string>
     <string name="note_datetime_dummy">datetime</string>
 
+    <!-- Login form strings -->
+    <string name="email_placeholder">Enter email</string>
+    <string name="password_placeholder">Enter password</string>
+    <string name="login_label">Login</string>
+
 </resources>

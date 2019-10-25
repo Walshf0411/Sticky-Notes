@@ -2,10 +2,13 @@ package com.stickynotes;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.firebase.ui.auth.AuthUI;
@@ -22,52 +25,41 @@ import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
 
-    List<AuthUI.IdpConfig> providers;
-    private static final int RC_SIGN_IN = 9999;
+    private SharedPrefManager sharedPrefManager;
+    private Button loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-//        initializeFirebaseAuthentication();
-        loginWithDefaultCredentials();
+        sharedPrefManager = new SharedPrefManager(this);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.hide();
+        }
+
+        initComponents();
+//        loginWithDefaultCredentials();
+    }
+
+    private void initComponents() {
+        loginButton = (Button) findViewById(R.id.login_button);
+        loginButton.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // TODO: add validation and check user details
+                        loginWithDefaultCredentials();
+                    }
+                }
+        );
     }
 
     private void gotToHomeScreen() {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RC_SIGN_IN) {
-            IdpResponse response = IdpResponse.fromResultIntent(data);
-
-            if (resultCode == RESULT_OK) {
-                // Successfully signed in
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                gotToHomeScreen();
-            } else {
-                Toast.makeText(this, "Please login or sign up to continue", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    private void initializeFirebaseAuthentication() {
-        providers = Arrays.asList(
-                new AuthUI.IdpConfig.EmailBuilder().build(),
-                new AuthUI.IdpConfig.GoogleBuilder().build()
-        );
-
-        startActivityForResult(
-                AuthUI.getInstance()
-                        .createSignInIntentBuilder()
-                        .setAvailableProviders(providers)
-                        .setIsSmartLockEnabled(false)
-                        .build(),
-                RC_SIGN_IN);
     }
 
     private void loginWithDefaultCredentials() {
