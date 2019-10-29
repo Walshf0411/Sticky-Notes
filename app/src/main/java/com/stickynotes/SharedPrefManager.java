@@ -9,6 +9,7 @@ public class SharedPrefManager {
 
     private static final String SHARED_PREF_FILENAME = "shared_preferences";
     private static final String USER_LOGGED_IN_TOKEN = "user_logged_in";
+    private static final String OVERLAY_TOKEN = "overlay_preferred";
 
     public SharedPrefManager(Context ctx) {
         this.ctx = ctx;
@@ -17,8 +18,13 @@ public class SharedPrefManager {
         );
     }
 
-    public boolean isUserLoggedIn() {
-        return sharedPref.getBoolean(USER_LOGGED_IN_TOKEN, false);
+    public boolean isOverlayPrefered() {
+        return sharedPref.getBoolean(OVERLAY_TOKEN, false);
     }
 
+    public void setOverlayPreferred(boolean preferred) {
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean(OVERLAY_TOKEN, preferred);
+        editor.apply();
+    }
 }

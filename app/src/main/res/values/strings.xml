@@ -19,6 +19,13 @@
     <!-- Login form strings -->
     <string name="email_placeholder">Enter email</string>
     <string name="password_placeholder">Enter password</string>
+    <string name="confirm_password_placeholder">Confirm password</string>
     <string name="login_label">Login</string>
+    <string name="signup_label">Signup</string>
+    <string name="logout_label">Logout</string>
+    <string name="enable_floating_widget_label">Enable floating widget</string>
+
+    <!-- Register form -->
+    <string name="name_placeholder">Enter name</string>
 
 </resources>

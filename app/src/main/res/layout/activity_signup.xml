@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".SignupActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -65,6 +65,24 @@
                 android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- CONFIRM PASSWORD TEXT FIELD -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin_by2"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/confirm_password_placeholder"
+                android:drawableStart="@drawable/ic_lock"
+                android:drawablePadding="10dp"
+                android:inputType="textPassword"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
         <Button
             android:id="@+id/signup_button"
             android:layout_height="wrap_content"
@@ -85,36 +103,16 @@
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="Do not have an account?"
+                android:text="Already have an account?"
                 />
             <TextView
                 android:id="@+id/login_here_btn"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text=" Register here"
+                android:text=" Click here"
                 android:textColor="@color/colorAccent"
                 />
         </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="OR"
-            android:textStyle="bold"
-            android:textSize="32sp"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            />
-
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/google_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="Text"
-            android:layout_alignParentTop="true"
-            android:layout_margin="10dp"
-            android:textSize="18sp" />
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

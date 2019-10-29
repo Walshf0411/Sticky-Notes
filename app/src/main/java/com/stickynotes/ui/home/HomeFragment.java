@@ -6,11 +6,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,6 +39,8 @@ public class HomeFragment extends Fragment {
     private RecyclerView notesListRecyclerView;
     private NoteAdapter noteAdapter = new NoteAdapter();
     private ProgressDialog progressDialog;
+    private LinearLayout noNotesOverlay;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -45,9 +49,15 @@ public class HomeFragment extends Fragment {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
 
+        initComponents();
         initRecyclerView();
 
         return root;
+    }
+
+    private void initComponents() {
+        noNotesOverlay = (LinearLayout) root.findViewById(R.id.no_notes_overlay);
+        noNotesOverlay.setVisibility(View.GONE);
     }
 
     private void initRecyclerView() {
@@ -59,7 +69,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void fetchData() {
-        // TODO: load shimmer here.
+        // TODO: load shimmer here and remove progressDialog
         showProgressDialog("Fetching your notes");
         homeViewModel.getNotesRepository().fetchAllNotes(
                 new OnCompleteListener<QuerySnapshot>() {
@@ -70,6 +80,10 @@ public class HomeFragment extends Fragment {
                             if (task.getResult() != null) {
                                 List<Note> notes = task.getResult().toObjects(Note.class);
                                 noteAdapter.setNotes(notes);
+                                if (notes.isEmpty()) {
+                                    noNotesOverlay.setVisibility(View.VISIBLE);
+                                    notesListRecyclerView.setVisibility(View.GONE);
+                                }
                             }
                             hideProgressDialog();
                         } else {

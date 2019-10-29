@@ -12,10 +12,12 @@
     <dimen name="header_size">32sp</dimen>
 
     <!-- card view font sizes -->
-    <dimen name="note_tile_size">24sp</dimen>
+    <dimen name="note_tile_size">18sp</dimen>
     <dimen name="note_size">14sp</dimen>
     <dimen name="datetime_size">12sp</dimen>
     <dimen name="note_item_in_between_margin">4dp</dimen>
 
     <dimen name="note_item_corner_radius">10</dimen>
+
+    <dimen name="settings_label_size">18sp</dimen>
 </resources>

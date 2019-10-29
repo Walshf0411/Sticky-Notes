@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class SplashScreen extends AppCompatActivity {
 
     @Override
@@ -20,13 +23,28 @@ public class SplashScreen extends AppCompatActivity {
             actionBar.hide();
         }
 
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
         new Handler().postDelayed(
                 new Runnable() {
                     @Override
                     public void run() {
-                        Intent intent = new Intent(SplashScreen.this, LoginActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
+                        if (user != null) {
+                            // USER IS ALREADY LOGGED IN
+                            startActivity(
+                                    Constants.getClearHistoryIntent(
+                                            SplashScreen.this,
+                                            MainActivity.class
+                                    )
+                            );
+                        } else {
+                            startActivity(
+                                    Constants.getClearHistoryIntent(
+                                            SplashScreen.this,
+                                            LoginActivity.class
+                                    )
+                            );
+                        }
                     }
                 },
                 4000
