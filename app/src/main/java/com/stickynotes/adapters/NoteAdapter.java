@@ -45,6 +45,14 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         notifyDataSetChanged();
     }
 
+    public void deleteNote(int position) {
+        notes.remove(position);
+    }
+
+    public void editNote(int position, Note note) {
+        notes.set(position, note);
+    }
+
     class NoteViewHolder extends RecyclerView.ViewHolder {
 
         private TextView title, note, datetime;

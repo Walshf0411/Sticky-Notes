@@ -1,6 +1,5 @@
 package com.stickynotes;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -26,8 +25,11 @@ public class Constants {
         Toast.makeText(ctx, message, Toast.LENGTH_SHORT).show();
     }
 
-    public static void log(String mesage) {
-        Log.i(TAG, mesage);
+    public static void log(String message) {
+        Log.i(TAG, message);
     }
 
+    public Intent getNotesHead(Context ctx) {
+        return new Intent(ctx, FloatingViewService.class);
+    }
 }
